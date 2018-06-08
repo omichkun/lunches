@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel" >
+  <div class="panel-heading" >Orders</div>
+  <div class="panel-body">
+    <%= link_to 'Make Order', new_order_path, class: 'btn btn-primary' %>
+    <br>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>User</th>
+          <th>Order Price</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at.strftime("%d.%m.%Y") %></td>
+            <td><%= order.user.email %></td>
+            <td><%= order_sum order %></td>
+            <td><%= link_to 'Show', order %></td>
+            <td><%= link_to 'Edit', edit_order_path(order) if Date.today.strftime("%d.%m.%Y") == order.created_at.strftime("%d.%m.%Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr><td colspan="4" class="text-center bg-success"><h4>First Course</h4></td></tr>
+      <% @today_menu.foods.first_course.each do |first| %>
+        <tr>
+          <td><%= form.radio_button :first_course_id, first.id %></td>
+          <td><%= first.name %></td>
+          <td><%= image_tag(first.image.thumb.url) if (first.image && first.image.length > 0) %></td>
+          <td>$<%= first.price %></td>
+        </tr>
+      <% end %>
+      <tr><td colspan="4" class="text-center bg-success"><h4>Main Course</h4></td></tr>
+      <% @today_menu.foods.main_course.each do |main| %>
+          <tr>
+            <td><%= form.radio_button :main_course_id, main.id %></td>
+            <td><%= main.name %></td>
+            <td><%= image_tag(main.image.thumb.url)  if (main.image && main.image.length > 0) %></td>
+            <td>$<%= main.price %></td>
+          </tr>
+      <% end %>
+      <tr><td colspan="4" class="text-center bg-success"><h4>Drinks</h4></td></tr>
+      <% @today_menu.foods.drink.each do |drink| %>
+          <tr>
+            <td><%= form.radio_button :drink_id, drink.id %></td>
+            <td><%= drink.name %></td>
+            <td><%= image_tag(drink.image.thumb.url) if (drink.image && drink.image.length > 0) %></td>
+            <td>$<%= drink.price %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Make Order", class: 'btn btn-primary' %>
+  </div>
+<% end %>

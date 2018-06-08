@@ -1,0 +1,39 @@
+
+<div class="panel" >
+  <div class="panel-heading" >Weekdays</div>
+  <div class="panel-body">
+    <% @menus.each do |menu| %>
+        <div class="col-md-3">
+          <div class="panel ">
+            <div class="panel-heading heading-inner">
+              <h4><%= menu.weekday.capitalize %> menu</h4>
+            </div>
+            <div class="panel-body <%= bg_color menu %>">
+              <h5>First course </h5>
+              <ul>
+                <% menu.foods.first_course.each do |food| %>
+                    <li><%= food.name %></b></li>
+                <% end %>
+              </ul>
+
+              <h5>Main course </h5>
+              <ul>
+                <% menu.foods.main_course.each do |food| %>
+                    <li><%= food.name %></b></li>
+                <% end %>
+              </ul>
+
+              <h5>Drinks </h5>
+              <ul>
+                <% menu.foods.drink.each do |food| %>
+                    <li><%= food.name %></b></li>
+                <% end %>
+              </ul>
+              <%= today_menu menu %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+  </div>
+</div>

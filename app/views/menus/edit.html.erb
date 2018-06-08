@@ -1,0 +1,13 @@
+<div class="panel affix-top" >
+  <div class="panel-heading" >Editing menu for <%= @menu.weekday %></div>
+  <div class="panel-body">
+
+    <%= render 'form', menu: @menu %>
+
+
+
+    <%= link_to 'Show', @menu %> |
+    <%= link_to 'Back', menus_path %>
+
+  </div>
+</div>

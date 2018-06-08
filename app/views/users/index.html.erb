@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Orders amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user|  %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.orders.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,13 @@
+<div class="panel affix-top" >
+  <div class="panel-heading">Profile</div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <%= link_to "Edit Profile", edit_user_path(@user), class: 'btn btn-primary' %>
+      <br>
+      <b>Email:</b> <%= @user.email %><br>
+      <b>About:</b> <p> <%= @user.about %> </p>
+      <b>Contact Phone:</b> <%= @user.contact_phone %>
+    </div>
+
+  </div>
+</div>

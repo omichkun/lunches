@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel" >
+  <div class="panel-heading" >Order</div>
+  <div class="panel-body">
+    <table class="table table-condensed">
+      <tr>
+        <th>Type</th>
+        <th>Food</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>First course</td>
+        <td><%= @order.first_course.name %></td>
+        <td><%= @order.first_course.price %></td>
+      </tr>
+      <tr>
+        <td>Main course</td>
+        <td><%= @order.main_course.name %></td>
+        <td><%= @order.main_course.price %></td>
+      </tr>
+      <tr>
+        <td>Drink</td>
+        <td><%= @order.drink.name %></td>
+        <td><%= @order.drink.price %></td>
+      </tr>
+      <tr class="bg-success">
+        <th colspan="2">Total price</th>
+        <th><%= @order.first_course.price + @order.main_course.price + @order.drink.price %></th>
+      </tr>
+    </table>
+    <%= link_to 'Edit', edit_order_path(@order) %> |
+    <%= link_to 'Back', orders_path %>
+  </div>
+</div>

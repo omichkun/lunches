@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="panel affix-top" >
+  <div class="panel-heading" >Menu for <%= @menu.weekday %></div>
+  <div class="panel-body">
+
+    <h4>First courses</h4>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr><td colspan="4" class="text-center bg-success"><h4>First Course</h4></td></tr>
+      <% @menu.foods.first_course.each do |first| %>
+          <tr>
+            <td><%= first.name %></td>
+            <td><%= image_tag(first.image.thumb.url) if (first.image && first.image.length > 0) %></td>
+            <td>$<%= first.price %></td>
+          </tr>
+      <% end %>
+      <tr><td colspan="4" class="text-center bg-success"><h4>Main Course</h4></td></tr>
+      <% @menu.foods.main_course.each do |main| %>
+          <tr>
+            <td><%= main.name %></td>
+            <td><%= image_tag(main.image.thumb.url)  if (main.image && main.image.length > 0) %></td>
+            <td>$<%= main.price %></td>
+          </tr>
+      <% end %>
+      <tr><td colspan="4" class="text-center bg-success"><h4>Drinks</h4></td></tr>
+      <% @menu.foods.drink.each do |drink| %>
+          <tr>
+            <td><%= drink.name %></td>
+            <td><%= image_tag(drink.image.thumb.url) if (drink.image && drink.image.length > 0) %></td>
+            <td>$<%= drink.price %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+
+    <%= link_to 'Edit', edit_menu_path(@menu) %> |
+    <%= link_to 'Back', menus_path %>
+
+  </div>
+</div>
+
+
+
