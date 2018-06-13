@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :check_admin, except: [:show, :edit, :update]
-  # before_action :authenticate_json
   before_action :require_permission
 
   def index
@@ -23,7 +22,6 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      params = user_params
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -41,15 +39,6 @@ class UsersController < ApplicationController
   private
 
 
-  def authenticate_json
-    if request.path_parameters[:format] == 'json'
-      authenticate!
-    end
-  end
-
-  def authenticate!
-
-  end
 
   def require_permission
     unless current_user.admin? || current_user == User.find(params[:id])
