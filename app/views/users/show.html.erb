@@ -6,6 +6,9 @@
       <br>
       <b>Email:</b> <%= @user.email %><br>
       <b>About:</b> <p> <%= @user.about %> </p>
+      <% if @user.access_token && @user.access_token.length > 0 %>
+        <b>Access token:</b> <p> <%= @user.access_token%> </p>
+      <% end %>
       <b>Contact Phone:</b> <%= @user.contact_phone %>
     </div>
 

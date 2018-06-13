@@ -14,7 +14,8 @@ class User < ApplicationRecord
 
   def set_first_admin
     if User.count == 1
-      User.first.update admin: true
+      User.first.update admin: true, access_token: SecureRandom.uuid
     end
   end
+
 end

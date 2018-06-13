@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_094544) do
+ActiveRecord::Schema.define(version: 2018_06_13_173633) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
     t.integer "food_type"
-    t.string "image_path"
+    t.string "image"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2018_06_08_094544) do
     t.boolean "admin"
     t.text "about"
     t.string "contact_phone"
+    t.string "access_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

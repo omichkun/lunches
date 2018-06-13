@@ -1,17 +1,27 @@
 class OrdersController < ApplicationController
+  skip_before_action :authenticate_user!, if: -> { authenticated_with_token? && action_name == "index" }
   before_action :set_order, only: [:show, :edit, :update]
   before_action :today_menu, only: [:new, :show, :edit, :create]
   before_action :require_permission, only: [:show]
   before_action :restrict_edit_previous_orders, only: [:edit]
 
+
   # GET /orders
   # GET /orders.json
   def index
-    if current_user.admin?
-      @orders = Order.all_orders
+    if request.path_parameters[:format] == 'json'
+      if authenticated_with_token?
+        @orders = Order.where(created_at: DateTime.now.beginning_of_week..DateTime.now)
+      end
     else
-      @orders = Order.all_orders.where(user: current_user)
+      if current_user.admin?
+        @orders = Order.all_orders
+      else
+        @orders = Order.all_orders.where(user: current_user)
+      end
     end
+
+
   end
 
   # GET /orders/1
@@ -70,6 +80,18 @@ class OrdersController < ApplicationController
       end
     end
 
+    def authenticated_with_token?
+      if params[:access_token] && params[:access_token].length > 0
+        user = User.find_by(access_token: params[:access_token])
+        if user
+          true
+        else
+          false
+        end
+      else
+        false
+      end
+    end
 
     def today_menu
       @today_menu = Menu.eager_load(:foods).today_menu.first

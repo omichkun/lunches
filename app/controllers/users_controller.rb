@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :check_admin, except: [:show, :edit, :update]
+  # before_action :authenticate_json
+  before_action :require_permission
 
   def index
     @users = User.all
@@ -38,12 +40,29 @@ class UsersController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit(:id, :about, :contact_phone, :password, :password_confirmation)
+  def authenticate_json
+    if request.path_parameters[:format] == 'json'
+      authenticate!
     end
+  end
+
+  def authenticate!
+
+  end
+
+  def require_permission
+    unless current_user.admin? || current_user == User.find(params[:id])
+      raise ActiveRecord::RecordNotFound
+    end
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:id, :about, :contact_phone, :password, :password_confirmation)
+  end
 
 end
