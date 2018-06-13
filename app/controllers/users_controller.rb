@@ -7,6 +7,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      if @user
+        format.html { render :show }
+        format.json { render :show, status: :ok, location: @user }
+      end
+    end
+
   end
 
   def edit
