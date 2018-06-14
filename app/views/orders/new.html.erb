@@ -2,9 +2,11 @@
 <div class="panel affix-top" >
   <div class="panel-heading" >New Order</div>
   <div class="panel-body">
-
-    <%= render 'form', order: @order %>
-
+    <% if @today_menu %>
+      <%= render 'form', order: @order %>
+    <% else %>
+      <div class="text-center">No menu for today</div>
+    <% end %>
     <%= link_to 'Back', orders_path %>
 
   </div>

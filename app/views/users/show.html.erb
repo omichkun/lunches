@@ -7,6 +7,8 @@
       <b>Email:</b> <%= @user.email %><br>
       <b>About:</b> <p> <%= @user.about %> </p>
       <% if @user.access_token && @user.access_token.length > 0 %>
+          <p>For getting access to REST API service you will need this access token below. Just make GET request to
+            <a href="<%= orders_url %>.json?access_token=<%= @user.access_token%>"><%= orders_url %>.json?access_token=<%= @user.access_token%></a> to get all the orders for current day.</p>
         <b>Access token:</b> <p> <%= @user.access_token%> </p>
       <% end %>
       <b>Contact Phone:</b> <%= @user.contact_phone %>

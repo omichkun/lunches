@@ -1,5 +1,5 @@
 # Change these
-server 'server', port: 7171, roles: [:web, :app, :db], primary: true
+server 'server', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:omichkun/lunches.git'
 set :application,     'lunches'

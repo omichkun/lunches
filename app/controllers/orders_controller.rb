@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def index
     if request.path_parameters[:format] == 'json'
       if authenticated_with_token?
-        @orders = Order.where(created_at: DateTime.now.beginning_of_week..DateTime.now)
+        @orders = Order.all_orders.where(created_at: DateTime.now.beginning_of_day..DateTime.now)
       end
     else
       if current_user.admin?
